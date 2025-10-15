@@ -1,8 +1,12 @@
+#######################
+# SLEEP MONITOR PLOTS #
+#######################
+
 # Load necessary libraries
 pacman::p_load(tidyverse, reshape2, lubridate)
 
 # Read the CSV file
-df <- read.csv('sleepICU_monitor_patientID1040.csv')
+df <- read.csv('sleepICU_monitor_patientID1045.csv')
 
 # Convert timestamp column to POSIXct
 timestamp_column <- names(df)[1]
@@ -22,8 +26,8 @@ df_long <- df_long[!is.na(df_long$value), ]
 # Define normal ranges for noise, light, and temperature
 normal_ranges <- data.frame(
   variable = c("Noise", "Light", "Temperature"),
-  min = c(40, 0, 20),
-  max = c(55, 100, 24)
+  min = c(30, 0, 20),
+  max = c(40, 100, 24)
 )
 
 # Calculate mean values for each variable
@@ -53,7 +57,7 @@ p <- ggplot() +
                                    "Noise: 40-55 dB", "Light: 0-100 lux", "Temperature: 20-24 C"),
                         name = "Normal Ranges")
   ) +
-  labs(x = "Time (Hour:Minute)", title = "Patient ID 1040 Sleep ICU Monitor Data Over Time") +
+  labs(x = "Time (Hour:Minute)", title = "Patient ID 1045 Sleep ICU Monitor Data Over Time") +
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1),
         legend.position = "bottom") +
